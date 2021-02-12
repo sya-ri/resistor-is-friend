@@ -1,10 +1,14 @@
 sealed class Resistor {
+    abstract val resistors: Map<Simple, Int>
+
     data class Simple(val value: Double) : Resistor() {
+        override val resistors = mapOf(this to 1)
+
         override fun toString() = value.toString()
     }
 
-    data class Combined(val pair: Pair<Resistor, Resistor>) : Resistor() {
-        override fun toString() = pair.first.toString() + ", " + pair.second.toString()
+    data class Combined(override val resistors: Map<Simple, Int>) : Resistor() {
+        override fun toString() = resistors.entries.joinToString { "${it.key}(${it.value})" }
     }
 
     companion object {

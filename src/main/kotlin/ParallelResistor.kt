@@ -8,7 +8,11 @@ object ParallelResistor {
                 result[combined] = result.getOrElse(combined) { mutableSetOf() }.apply {
                     r1.value.forEach { r1r ->
                         r2.value.forEach { r2r ->
-                            add(Resistor.Combined(r1r to r2r))
+                            val combinedPattern = r1r.resistors.toMutableMap()
+                            r2r.resistors.forEach {
+                                combinedPattern[it.key] = combinedPattern.getOrElse(it.key) { 0 } + 1
+                            }
+                            add(Resistor.Combined(combinedPattern))
                         }
                     }
                 }
