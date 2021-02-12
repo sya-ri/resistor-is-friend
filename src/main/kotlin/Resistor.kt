@@ -12,7 +12,7 @@ sealed class Resistor {
     }
 
     companion object {
-        fun fromValues(vararg value: Double): Map<Double, Set<Simple>> {
+        fun fromValues(vararg value: Double): Map<Double, Set<Resistor>> {
             return value.associate { it to setOf(Simple(it)) }
         }
     }
