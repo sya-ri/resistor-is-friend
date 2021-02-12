@@ -10,7 +10,7 @@ object ParallelResistor {
                         r2.value.forEach { r2r ->
                             val combinedPattern = r1r.resistors.toMutableMap()
                             r2r.resistors.forEach {
-                                combinedPattern[it.key] = combinedPattern.getOrElse(it.key) { 0 } + 1
+                                combinedPattern[it.key] = combinedPattern.getOrElse(it.key) { 0 } + it.value
                             }
                             add(Resistor.Combined(combinedPattern))
                         }
